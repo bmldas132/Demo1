@@ -1,1 +1,43 @@
-Deployed using CI/CD Github Actions.
+<div style="width: 25%; display: inline-block;">
+    <h4>Register</h4>
+    <div>
+        <label>Email:</label>
+        <br />
+        <input type="text" [(ngModel)]="model.SignUp.Email" />
+        <br /><br />
+        <label>Password:</label>
+        <br />
+        <input type="password" [(ngModel)]="model.SignUp.Password" />
+        <br /><br />
+        <input type="button" value="Signup" (click)="SignUp()" />
+    </div>
+</div>
+<div style="width: 25%; display: inline-block;">
+    <h4>Login</h4>
+    <div>
+        <label>Email:</label>
+        <br />
+        <input type="text" [(ngModel)]="model.SignIn.Email" />
+        <br /><br />
+        <label>Password:</label>
+        <br />
+        <input type="password" [(ngModel)]="model.SignIn.Password" />
+        <br /><br />
+        <input type="button" value="Sign In" (click)="SignIn()" />
+    </div>
+</div>
+<div style="width: 25%; display: inline-block;">
+    <h4>Sign Out</h4>
+    <div>
+        <input type="button" value="Sign Out" (click)="SignOut()" />
+    </div>
+</div>
+
+<div style="width: 25%; display: inline-block;">
+    <h4>Get Logged in User</h4>
+    <div>
+        <input type="button" value="Get Logged In User Email" (click)="GetLoggedInUserEmail()" />
+        <br>
+        <label>{{loggedInUser}}</label>
+    </div>
+</div>
