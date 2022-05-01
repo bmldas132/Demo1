@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, signOut } from "@angular/fire/auth";
 import { Firestore, getDocs, addDoc, collection } from "@angular/fire/firestore";
+import { getStorage, ref, uploadBytes, uploadString, listAll } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
-
+  storage = getStorage();
   constructor(private auth: Auth, private firestore: Firestore) { 
     
   }
@@ -74,5 +75,27 @@ export class FirebaseService {
       console.log(error);
     }
     return newData;
+  }
+
+  async UploadFileAsText(fileName: string, content: string){
+    const storageRef = ref(this.storage, "Employees/" + fileName);
+    try {
+      await uploadString(storageRef, content);
+      alert("Uploaded image successfully.");
+    } catch (error) {
+      alert("Error occured while uploading image. Check console for detail.");
+      console.log(error);
+    }
+  }
+
+  async GetAllImages(){
+    const listRef = ref(this.storage, "Employees");
+    try {
+      var filesRef = await listAll(listRef);
+      return filesRef.items;
+    } catch (error) {
+      alert();
+    }
+    return null;
   }
 }

@@ -19,11 +19,16 @@ export class AppComponent {
     },
     NewEmployee: {
       Name: ""
+    },
+    Image:{
+      ImageContent: null,
+      FileName: ""
     }
   }
 
   loggedInUser: any = "";
   employees: any = [];
+  allImages: any = null;
 
   constructor(private firebaseService: FirebaseService){
     
@@ -62,5 +67,25 @@ export class AppComponent {
   async GetEmployees(){
     this.employees = await this.firebaseService.GetEmployees();
     console.log(this.employees)
+  }
+
+  fileChanged(e: any) {
+    this.model.Image.ImageContent = e.target.files[0];
+    this.model.Image.FileName = e.target.files[0]?.name;
+  }
+
+  async UploadImage(){
+    console.log(this.model.Image.ImageContent);
+    let fileReader = new FileReader();
+    fileReader.onload = async (e) => {
+      console.log(fileReader.result?.toString());
+      await this.firebaseService.UploadFileAsText(this.model.Image.FileName, <any>fileReader.result?.toString());
+    }
+    fileReader.readAsText(<any>this.model.Image.ImageContent);
+  }
+
+  async GetImages(){
+    this.allImages = await this.firebaseService.GetAllImages();
+    console.log(this.allImages);
   }
 }

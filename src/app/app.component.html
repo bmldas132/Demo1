@@ -63,3 +63,25 @@
         
     </div>
 </div>
+
+
+<div style="width: 25%; display: inline-block;">
+    <h4>Upload Image</h4>
+    <div>
+        <input type="file" placeholder="Select file" (change)="fileChanged($event)">
+        
+        <br><br />
+        <input type="button" value="Upload File" (click)="UploadImage()" />
+        
+    </div>
+</div>
+
+<div style="width: 25%; display: inline-block;">
+    <h4>Get Images</h4>
+    <div>
+        <input type="button" value="Get Images" (click)="GetImages()" />
+        <ol *ngIf="allImages && allImages.length">
+            <li *ngFor="let img of allImages">{{img}}</li>
+        </ol>
+    </div>
+</div>
