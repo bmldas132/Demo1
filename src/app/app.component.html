@@ -41,3 +41,25 @@
         <label>{{loggedInUser}}</label>
     </div>
 </div>
+
+<hr>
+<div style="width: 25%; display: inline-block;">
+    <h4>Add Employee</h4>
+    <div>
+        <input type="text" [(ngModel)]="model.NewEmployee.Name" />
+        <br><br />
+        <input type="button" value="Create Employee" (click)="AddEmployee()" />
+    </div>
+</div>
+
+<div style="width: 25%; display: inline-block;">
+    <h4>Employee List</h4>
+    <div>
+        <input type="button" value="Get Employees" (click)="GetEmployees()" />
+        <ol *ngIf="employees && employees.length">
+            <li *ngFor="let emp of employees">{{emp.EmployeeName}}</li>
+        </ol>
+        <br><br />
+        
+    </div>
+</div>

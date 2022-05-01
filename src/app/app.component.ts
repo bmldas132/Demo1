@@ -16,10 +16,14 @@ export class AppComponent {
     SignIn: {
       Email: "",
       Password: ""
+    },
+    NewEmployee: {
+      Name: ""
     }
   }
 
   loggedInUser: any = "";
+  employees: any = [];
 
   constructor(private firebaseService: FirebaseService){
     
@@ -49,5 +53,14 @@ export class AppComponent {
     else{
       this.loggedInUser = "You are not logged in!!!";
     }
+  }
+
+  async AddEmployee(){
+    await this.firebaseService.AddEmployee(this.model.NewEmployee.Name);
+  }
+
+  async GetEmployees(){
+    this.employees = await this.firebaseService.GetEmployees();
+    console.log(this.employees)
   }
 }
